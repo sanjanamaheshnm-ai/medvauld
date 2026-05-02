@@ -104,40 +104,48 @@ export default function PatientDetail() {
       </div>
 
       {/* Patient Profile Summary */}
-      <div className="p-6 bg-slate-900 text-white rounded-[2rem] space-y-4 shadow-xl shadow-blue-100">
-        <div className="flex justify-between items-start">
-          <div className="space-y-1">
-            <h2 className="text-2xl font-bold text-blue-400">{patient.name}</h2>
-            <p className="text-slate-400 text-sm flex items-center gap-2">
-              <MapPin className="w-3 h-3" /> {patient.address}
+      <div className="p-8 bg-slate-900 text-white rounded-[2.5rem] space-y-6 shadow-2xl shadow-blue-500/10 relative overflow-hidden group">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full -mr-32 -mt-32 blur-3xl group-hover:bg-blue-500/20 transition-all duration-700" />
+        
+        <div className="flex justify-between items-start relative z-10">
+          <div className="space-y-2">
+            <p className="text-blue-500 text-[10px] uppercase font-black tracking-[0.2em]">Verified MedVault</p>
+            <h2 className="text-3xl font-bold tracking-tight">{patient.name}</h2>
+            <p className="text-slate-400 text-sm flex items-center gap-2 font-medium">
+              <MapPin className="w-4 h-4 text-blue-500" /> {patient.address}
             </p>
           </div>
-          <div className="px-3 py-1 bg-blue-500/20 text-blue-400 border border-blue-500/30 rounded-full text-xs font-bold uppercase tracking-wider">
-            Verified
+          <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-md border border-white/10">
+            <User className="w-8 h-8 text-blue-400" />
           </div>
         </div>
         
-        <div className="grid grid-cols-3 gap-4 pt-4 border-t border-white/10">
+        <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/5 relative z-10">
           <div className="space-y-1">
             <p className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Blood Group</p>
-            <div className="flex items-center gap-1 text-red-400">
-              <Droplets className="w-3 h-3" /> <span className="font-bold">{patient.bloodGroup}</span>
+            <div className="flex items-center gap-2 text-red-500">
+              <Droplets className="w-4 h-4 fill-red-500" /> <span className="font-bold text-lg">{patient.bloodGroup}</span>
             </div>
           </div>
           <div className="space-y-1">
             <p className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Gender</p>
-            <p className="font-bold">{patient.gender}</p>
+            <p className="font-bold text-lg">{patient.gender}</p>
           </div>
           <div className="space-y-1">
             <p className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Age</p>
-            <p className="font-bold">{patient.age} Yrs</p>
+            <p className="font-bold text-lg">{patient.age} <span className="text-sm font-medium opacity-50">Y</span></p>
           </div>
         </div>
       </div>
 
-      <div className="flex items-center gap-2 text-slate-400 px-1 pt-2">
-        <Stethoscope className="w-5 h-5" />
-        <h2 className="font-display font-bold text-slate-900">Medical History</h2>
+      <div className="flex items-center justify-between px-1 pt-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600">
+            <Stethoscope className="w-5 h-5" />
+          </div>
+          <h2 className="font-display font-bold text-xl text-slate-900 tracking-tight">Clinical History</h2>
+        </div>
+        <span className="px-3 py-1 bg-slate-100 text-slate-500 rounded-full text-[10px] font-bold uppercase tracking-widest">{records.length} Entries</span>
       </div>
 
       <TimelineList records={records} />

@@ -90,5 +90,27 @@ export const mockDb = {
     records.push(newRecord);
     setStorage(STORAGE_KEYS.RECORDS, records);
     return newRecord;
+  },
+
+  getReminders: (patientId) => {
+    const reminders = JSON.parse(localStorage.getItem('medvault_reminders') || '[]');
+    return reminders.filter(r => r.patientId === patientId);
+  },
+
+  addReminder: (patientId, reminder) => {
+    const reminders = JSON.parse(localStorage.getItem('medvault_reminders') || '[]');
+    const newRem = { id: Date.now(), patientId, ...reminder, completed: false };
+    reminders.push(newRem);
+    localStorage.setItem('medvault_reminders', JSON.stringify(reminders));
+    return newRem;
+  },
+
+  toggleReminder: (id) => {
+    const reminders = JSON.parse(localStorage.getItem('medvault_reminders') || '[]');
+    const index = reminders.findIndex(r => r.id === id);
+    if (index !== -1) {
+      reminders[index].completed = !reminders[index].completed;
+      localStorage.setItem('medvault_reminders', JSON.stringify(reminders));
+    }
   }
 };

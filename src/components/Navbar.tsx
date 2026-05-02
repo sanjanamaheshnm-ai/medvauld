@@ -15,19 +15,19 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 bg-white/80 backdrop-blur-md border-b border-slate-200 z-50">
-      <div className="max-w-md mx-auto px-4 h-16 flex items-center justify-between">
-        <Link to="/dashboard" className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-            <Shield className="w-5 h-5 text-white" />
+    <nav className="sticky top-0 bg-white/70 backdrop-blur-xl border-b border-slate-100 z-50">
+      <div className="max-w-md mx-auto px-4 h-20 flex items-center justify-between">
+        <Link to="/dashboard" className="flex items-center gap-3 active:scale-95 transition-transform">
+          <div className="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/20">
+            <Shield className="w-6 h-6 text-white" />
           </div>
-          <span className="font-display font-bold text-xl tracking-tight text-slate-900">MedVault</span>
+          <span className="font-display font-extrabold text-2xl tracking-tighter text-slate-900">MedVault</span>
         </Link>
         
         {user && (
           <button 
             onClick={handleLogout}
-            className="p-2 text-slate-500 hover:text-red-600 transition-colors"
+            className="w-10 h-10 border border-slate-200 rounded-xl flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors bg-white shadow-sm"
           >
             <LogOut className="w-5 h-5" />
           </button>

@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { User, Stethoscope, ArrowRight, Mail, Lock } from 'lucide-react';
+import { User, Stethoscope, ArrowRight, Mail, Lock, Shield } from 'lucide-react';
 import { mockAuth } from '../lib/mockFirebase';
 import { AuthContext } from '../App';
 
@@ -32,65 +32,72 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col gap-8 pt-4">
-      <div className="text-center space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900">
-          {isLogin ? 'Welcome back' : 'Create an account'}
+    <div className="flex flex-col gap-10 pt-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+      <div className="text-center space-y-4">
+        <div className="inline-flex p-3 bg-blue-600 rounded-[1.5rem] shadow-xl shadow-blue-500/20 mb-2">
+          <Shield className="w-8 h-8 text-white" />
+        </div>
+        <h1 className="text-4xl font-bold tracking-tight text-slate-900 font-display">
+          {isLogin ? 'Welcome back' : 'Create account'}
         </h1>
-        <p className="text-slate-500">Secure medical records on the go.</p>
+        <p className="text-slate-500 font-medium">Your medical world, secured.</p>
       </div>
 
-      <div className="flex p-1 bg-slate-100 rounded-xl">
+      <div className="flex p-1.5 bg-slate-100 rounded-2xl ring-1 ring-slate-200">
         <button
           onClick={() => setRole('patient')}
-          className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-medium transition-all ${
-            role === 'patient' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500'
+          className={`flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl text-sm font-bold transition-all ${
+            role === 'patient' ? 'bg-white text-blue-600 shadow-lg shadow-slate-200' : 'text-slate-500 hover:text-slate-700'
           }`}
         >
           <User className="w-4 h-4" /> Patient
         </button>
         <button
           onClick={() => setRole('doctor')}
-          className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-medium transition-all ${
-            role === 'doctor' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500'
+          className={`flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl text-sm font-bold transition-all ${
+            role === 'doctor' ? 'bg-white text-blue-600 shadow-lg shadow-slate-200' : 'text-slate-500 hover:text-slate-700'
           }`}
         >
           <Stethoscope className="w-4 h-4" /> Doctor
         </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-5">
         {error && (
-          <div className="p-3 bg-red-50 text-red-600 text-sm rounded-lg border border-red-100">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="p-4 bg-red-50 text-red-600 text-xs font-bold uppercase tracking-wider rounded-2xl border border-red-100 text-center"
+          >
             {error}
-          </div>
+          </motion.div>
         )}
         
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-700 ml-1">Email Address</label>
+        <div className="space-y-2 group">
+          <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Email Address</label>
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
             <input
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+              className="w-full pl-12 pr-4 py-4 bg-white border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all font-medium"
               placeholder="name@example.com"
             />
           </div>
         </div>
 
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-700 ml-1">Password</label>
+        <div className="space-y-2 group">
+          <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Password</label>
           <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
             <input
               type="password"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+              className="w-full pl-12 pr-4 py-4 bg-white border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all font-medium"
               placeholder="••••••••"
             />
           </div>
@@ -98,9 +105,9 @@ export default function Login() {
 
         <button
           type="submit"
-          className="w-full py-4 bg-blue-600 text-white font-semibold rounded-xl shadow-lg shadow-blue-200 hover:bg-blue-700 flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
+          className="w-full py-4.5 bg-blue-600 text-white font-bold rounded-2xl shadow-2xl shadow-blue-500/30 hover:bg-blue-700 flex items-center justify-center gap-3 transition-all active:scale-[0.98] mt-4"
         >
-          {isLogin ? 'Sign In' : 'Sign Up'} <ArrowRight className="w-5 h-5" />
+          {isLogin ? 'Sign In to Vault' : 'Create Secure Vault'} <ArrowRight className="w-5 h-5" />
         </button>
       </form>
 

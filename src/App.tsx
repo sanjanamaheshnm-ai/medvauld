@@ -14,9 +14,11 @@ import Upload from './pages/Upload';
 import Timeline from './pages/Timeline';
 import PatientDetail from './pages/PatientDetail';
 import Onboarding from './pages/Onboarding';
+import Healthu from './pages/Healthu';
 
 // Components
 import Navbar from './components/Navbar';
+import BottomNav from './components/BottomNav';
 
 export const AuthContext = createContext(null);
 
@@ -60,6 +62,11 @@ export default function App() {
                   <Dashboard />
                 </ProtectedRoute>
               } />
+              <Route path="/ai-assistant" element={
+                <ProtectedRoute>
+                  <Healthu />
+                </ProtectedRoute>
+              } />
               <Route path="/patient/upload" element={
                 <ProtectedRoute role="patient">
                   <Upload />
@@ -78,6 +85,7 @@ export default function App() {
               <Route path="*" element={<Navigate to="/dashboard" />} />
             </Routes>
           </div>
+          <BottomNav />
         </div>
       </Router>
     </AuthContext.Provider>
